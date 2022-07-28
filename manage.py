@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# pylint: skip-file
 from flask.cli import FlaskGroup
 
 from app import app
