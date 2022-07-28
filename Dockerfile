@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 # set environment variables
 
 #Prevents Python from writing pyc files to disc
-ENV PYTHONDONTWRITEBYTECODE 1 
+ENV PYTHONDONTWRITEBYTECODE 1
 #Prevents Python from buffering stdout and stderr
 ENV PYTHONUNBUFFERED 1
 
