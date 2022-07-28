@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: web-backend
+    build: .
+    volumes:
+      - .:/usr/src/app/
+    stdin_open: true
+    tty: true
+    restart: always
+    env_file:
+      - ./.env.dev
+    entrypoint: sh entrypoint.sh
+    network_mode: "host"
