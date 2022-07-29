@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # pylint: skip-file
 from flask.cli import FlaskGroup
-from app.utils.database import init_db, SESSION
 
 from app import app
+from app.utils.database import init_db, SESSION
 
 
 cli = FlaskGroup(app)

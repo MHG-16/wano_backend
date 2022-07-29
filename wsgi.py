@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 # pylint: skip-file
-from app import app
+from app.run import app
 
-app.config["DEBUG"] = False
+app.config["DEBUG"] = True
