@@ -25,7 +25,8 @@ def _error(error):
 
 
 @app.teardown_request
-def teardown_db():
+def teardown_db(exception):
+    # pylint: disable=unused-argument
     database = g.pop("db", None)
     if database is not None:
         database.close()

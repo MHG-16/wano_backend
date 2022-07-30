@@ -12,7 +12,7 @@ engine = create_engine(
 )
 
 SESSION = scoped_session(
-    sessionmaker(autocommit=False, autoFlash=False, bind=engine, expire_on_commit=False)
+    sessionmaker(autocommit=False, autoflush=False, bind=engine, expire_on_commit=False)
 )
 
 Base = declarative_base()
