@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
 # pylint: skip-file
 from flask.cli import FlaskGroup
+from contextlib import suppress
 
 from app import app
-from app.utils.database import init_db, SESSION
+from app.user.models import Users
+from app.utils.database import SESSION, engine
+
+
+def init_db():
+    with suppress(Exception):
+        Users.__table__.drop(engine)
+    Users.__table__.create(engine)
 
 
 cli = FlaskGroup(app)

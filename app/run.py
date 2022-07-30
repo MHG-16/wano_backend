@@ -2,12 +2,14 @@
 from flask import Flask, jsonify, g
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
+from flask_marshmallow import Marshmallow
 
 from .utils.database import SESSION, engine
 
 
 app = Flask(__name__, template_folder="templates")
 CORS(app)
+ma = Marshmallow(app)
 
 
 # Handling error
