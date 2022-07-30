@@ -5,3 +5,4 @@ disable=
     C0116, # missing-functions-docstring
     C0325, # Unnecessary parens after 'if' keyword (superfluous-parens)
     E0401, # disable import-error
+ignored-classe= scoped_session
