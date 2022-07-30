@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, jsonify, g
 from flask_cors import CORS
+from flask_swagger_ui import get_swaggerui_blueprint
 
 from .utils.database import SESSION, engine
 
@@ -22,6 +23,18 @@ def _error(error):
         return jsonify({"error": True, "message": str(error)}), 404
 
     return None
+
+
+# start swagger specific #
+SWAGGER_URL = "/swagger"
+API_URL = "/static/swagger.yaml"
+SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL, API_URL, config={"app_name": "Seans-Python-Flask-REST-WanoAPIS"}
+)
+app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+
+
+# end swagger specific #
 
 
 @app.teardown_request

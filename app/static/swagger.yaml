@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  description: Description des web services de Remoteprod
+  version: "1.0.0"
+  title: Wano Documentation
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "hammahadi2006@gmail.com"
+  license:
+    name: MHG-16
+    url: https://opensource.org/licenses/MIT
+tags:
+- name: "authentication"
+  description: "<p> Cet Api contient un service web de login ayant comme des entrées email et password d'un user
+  <br/> il génére un access token  pour accéder les autres services web de plateforme</p>"
+- name: User
+  description: liste des web services d'user
+paths:
+  "/login":
+    post:
+      tags:
+      - authentication
+      summary: Avoir l'acces token pour pouvoir exécuter les autres webservices
+      security:
+      - wano_auth: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Échoué. Demande mal comprise.
+        '404':
+          description: demande introuvable.
+        '500':
+          description: Erreur de serveur
+  "/user/create":
+    post:
+      tags:
+      - User
+      summary: Creation d'un nouveau utilisateur
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        items:
+          $ref: "#/definitions/User"
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Échoué. Demande mal comprise
+        "404":
+          description: Demande introuvable
+        "500":
+          description: Erreur serveur
+
+securityDefinitions:
+  wano_auth:
+    type: basic
+  acess_Token:
+    type: "apiKey"
+    name: "idSession"
+    in: "header"
+
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      phone:
+        type: "string"
+      userStatus:
+        type: "integer"
+        description: "User Status"
+        default: 1
+    xml:
+      name: "User"
+security:
+- acess_Token: []
