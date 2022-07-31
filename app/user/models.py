@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=R0903
+from dataclasses import dataclass
 from sqlalchemy import Column, Integer, String, Date
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
-from ..utils.database import Base
+from ..utils.database import Base, SESSION
 
 
 class Users(Base):
@@ -13,7 +14,7 @@ class Users(Base):
     id_user = Column(Integer, primary_key=True)
     last_name = Column(String(25), nullable=False)
     first_name = Column(String(25), nullable=False)
-    email = Column(String(50), nullable=False)
+    email = Column(String(50), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
     date_of_birth = Column(Date, nullable=False)
     tel = Column(String(25), nullable=False)
@@ -45,3 +46,21 @@ class UsersSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Users
         load_instance = True
+
+
+@dataclass
+class UserActions:
+    adresse_email: str
+    password: str
+
+    def get(self):
+        data = SESSION.query(Users).filter(Users.email.like(self.adresse_email))
+        return Users.dump(data)
+
+    def update_password(self):
+        result = (
+            SESSION.query(Users)
+            .filter(Users.email.like(self.adresse_email))
+            .update({"password": self.password})
+        )
+        return result
