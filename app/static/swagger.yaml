@@ -37,19 +37,43 @@ paths:
       tags:
       - User
       summary: Creation d'un nouveau utilisateur
-      parameters:
-      - in: "body"
-        name: "body"
+      requestBody:
         required: true
-        items:
-          $ref: "#/definitions/User"
+        content:
+            application/json:
+              schema:
+                type: object
+                required:
+                    - first_name
+                    - last_name
+                    - email
+                    - password
+                    - tel
+                    - user_status
+                properties:
+                  first_name:
+                    type: "string"
+                  last_name:
+                    type: "string"
+                  email:
+                    type: "string"
+                  password:
+                    type: "string"
+                  tel:
+                    type: "string"
+                  user_status:
+                    type: "integer"
+                    description: "User Status"
+                    default: 1
+                  date_of_birth:
+                    type: "string"
       responses:
         '200':
           description: OK
         '400':
           description: Échoué. Demande mal comprise
-        "404":
-          description: Demande introuvable
+        "409":
+          description: Email existe
         "500":
           description: Erreur serveur
 
@@ -61,27 +85,5 @@ securityDefinitions:
     name: "idSession"
     in: "header"
 
-definitions:
-  User:
-    type: "object"
-    properties:
-      id:
-        type: "string"
-      firstName:
-        type: "string"
-      lastName:
-        type: "string"
-      email:
-        type: "string"
-      password:
-        type: "string"
-      phone:
-        type: "string"
-      userStatus:
-        type: "integer"
-        description: "User Status"
-        default: 1
-    xml:
-      name: "User"
 security:
 - acess_Token: []

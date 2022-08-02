@@ -3,7 +3,7 @@
 from flask.cli import FlaskGroup
 from contextlib import suppress
 
-from app import app
+from app.run import app
 from app.user.models import Users
 from app.utils.database import SESSION, engine
 

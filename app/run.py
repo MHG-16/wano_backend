@@ -18,10 +18,10 @@ def _error(error):
     if isinstance(error, ConnectionError):
         return jsonify({"error": True, "message": str(error)}), 500
 
-    if 405 in str(error):
+    if "405" in str(error):
         return jsonify({"error": True, "message": str(error)}), 405
 
-    if 404 in str(error):
+    if "404" in str(error):
         return jsonify({"error": True, "message": str(error)}), 404
 
     return None
