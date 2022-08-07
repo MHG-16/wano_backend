@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 from flask import request, jsonify
+from flask import Blueprint
 
-from app.run import app
 from app.user.utils import insert, verify_existance_mail
 
 
-@app.route("/user/create", methods=["POST"])
+app = Blueprint("Users API", __name__)
+
+
+@app.route("/create", methods=["POST"])
 def create_user():
     data_user = request.json
     mail_user = data_user.get("email")
-    print(verify_existance_mail(mail_user))
     if verify_existance_mail(mail_user):
         return (
             jsonify(

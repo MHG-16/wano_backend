@@ -16,18 +16,22 @@ tags:
 - name: User
   description: liste des web services d'user
 paths:
-  "/login":
+  "/login?":
     post:
       tags:
       - authentication
       summary: Avoir l'acces token pour pouvoir exécuter les autres webservices
+      parameters: []
       security:
-      - wano_auth: []
+      - basicAuth: []
       responses:
         '200':
           description: OK
         '400':
           description: Échoué. Demande mal comprise.
+        '401':
+          description: Api key invalide
+          ref: "#/components/responses/UnauthorizedError"
         '404':
           description: demande introuvable.
         '500':
@@ -49,6 +53,7 @@ paths:
                     - email
                     - password
                     - tel
+                    - genre
                     - user_status
                 properties:
                   first_name:
@@ -67,6 +72,9 @@ paths:
                     default: 1
                   date_of_birth:
                     type: "string"
+                  genre:
+                    type: "string"
+                    example: "m"
       responses:
         '200':
           description: OK
@@ -77,13 +85,21 @@ paths:
         "500":
           description: Erreur serveur
 
-securityDefinitions:
-  wano_auth:
-    type: basic
-  acess_Token:
-    type: "apiKey"
-    name: "idSession"
-    in: "header"
-
-security:
-- acess_Token: []
+components:
+  securitySchemes:
+    acess_Token:
+      type: apiKey
+      in: header
+      name: idSession
+    basicAuth:
+      type: http
+      scheme: basic
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+            username: test
+            password: test

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=R0903
 from dataclasses import dataclass
-from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy import Column, Integer, String, Date, Boolean
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 from ..utils.database import Base, SESSION
@@ -19,6 +19,7 @@ class Users(Base):
     date_of_birth = Column(Date, nullable=False)
     tel = Column(String(25), nullable=False)
     user_status = Column(Integer, nullable=False)
+    genre = Column(Boolean, nullable=False)
 
     def __init__(
         self,
@@ -30,6 +31,7 @@ class Users(Base):
         date_of_birth=None,
         tel=None,
         user_status=None,
+        genre=None,
     ):
         # pylint: disable=R0913
         self.id_user = id_user
@@ -40,6 +42,7 @@ class Users(Base):
         self.date_of_birth = date_of_birth
         self.tel = tel
         self.user_status = user_status
+        self.genre = genre
 
 
 class UsersSchema(SQLAlchemyAutoSchema):
