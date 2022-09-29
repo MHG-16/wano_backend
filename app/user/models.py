@@ -20,6 +20,7 @@ class Users(Base):
     tel = Column(String(25), nullable=False)
     user_status = Column(Integer, nullable=False)
     genre = Column(Boolean, nullable=False)
+    access_token = Column(String(255), nullable=True)
 
     def __init__(
         self,

@@ -36,6 +36,17 @@ paths:
           description: demande introuvable.
         '500':
           description: Erreur de serveur
+  "/logout?":
+    post:
+      tags:
+      - authentication
+      summary: Déconnecter la session en cours
+      parameters: []
+      security:
+      - acess_Token: []
+      responses:
+        '200':
+          description: Deconnected
   "/user/create":
     post:
       tags:
