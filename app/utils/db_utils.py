@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from werkzeug.local import LocalProxy
 from flask import g
-from mysql.connector import errors
+
 import mysql.connector as mariadb
 
 
@@ -10,7 +10,7 @@ def get_db():
         try:
             # pylint: disable=E0237
             g.db = connexion()
-        except (errors.DataseError, errors.Interface) as err:
+        except (ConnectionError) as err:
             raise ConnectionError("Problem connecting to database") from err
         return g.db
     return None
@@ -37,7 +37,7 @@ def selectqueryfetchone(query):
         return column_value[0]
     except (IndexError, TypeError):
         return None
-    except (errors.InterfaceError, errors.OperationalError) as err:
+    except (ConnectionError) as err:
         raise ConnectionError("Problem connecting to database") from err
 
 
@@ -49,5 +49,5 @@ def updatequery(query: str):
         rowcount = cursor.rowcount
         cursor.close()
         return rowcount > 0
-    except (errors.InterfaceError, errors.OperationalError, ConnectionError) as err:
+    except (ConnectionError) as err:
         raise ConnectionError("Problem connecting to database") from err
