@@ -40,5 +40,4 @@ def update_token_by_email(email: str):
 def update_token_by_access_token(access_token: str):
     token = secrets.token_hex()
     query = f"UPDATE users SET access_token = '{token}' where access_token = '{access_token}'"
-    print(query)
     return bool(updatequery(query))

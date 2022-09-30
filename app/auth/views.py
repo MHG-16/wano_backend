@@ -22,9 +22,9 @@ def login():
 
 @app.route("/logout", methods=["POST"])
 def logout():
-    id_session = request.headers.get("idSession")
+    id_session = request.headers.get("authorization")
     response = update_token_by_access_token(id_session)
-    print(response)
+    print(id_session)
     if response:
         return jsonify({"error": False, "message": "user is logged out"}), 200
     return jsonify({"error": True, "message": "idSession not found"}), 405
