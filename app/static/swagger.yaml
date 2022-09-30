@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  description: Description des web services de Remoteprod
+  version: "1.0.0"
+  title: Wano Documentation
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "hammahadi2006@gmail.com"
+  license:
+    name: MHG-16
+    url: https://opensource.org/licenses/MIT
+tags:
+- name: "authentication"
+  description: "<p> Cet Api contient un service web de login ayant comme des entrées email et password d'un user
+  <br/> il génére un access token  pour accéder les autres services web de plateforme</p>"
+- name: User
+  description: liste des web services d'user
+paths:
+  "/login?":
+    post:
+      tags:
+      - authentication
+      summary: Avoir l'acces token pour pouvoir exécuter les autres webservices
+      parameters: []
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Échoué. Demande mal comprise.
+        '401':
+          description: Api key invalide
+          ref: "#/components/responses/UnauthorizedError"
+        '404':
+          description: demande introuvable.
+        '500':
+          description: Erreur de serveur
+  "/logout?":
+    post:
+      tags:
+      - authentication
+      summary: Déconnecter la session en cours
+      parameters: []
+      security:
+      - acess_Token: []
+      responses:
+        '200':
+          description: Deconnected
+  "/user/create":
+    post:
+      tags:
+      - User
+      summary: Creation d'un nouveau utilisateur
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                type: object
+                required:
+                    - first_name
+                    - last_name
+                    - email
+                    - password
+                    - tel
+                    - genre
+                    - user_status
+                properties:
+                  first_name:
+                    type: "string"
+                  last_name:
+                    type: "string"
+                  email:
+                    type: "string"
+                  password:
+                    type: "string"
+                  tel:
+                    type: "string"
+                  user_status:
+                    type: "integer"
+                    description: "User Status"
+                    default: 1
+                  date_of_birth:
+                    type: "string"
+                  genre:
+                    type: "string"
+                    example: "m"
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Échoué. Demande mal comprise
+        "409":
+          description: Email existe
+        "500":
+          description: Erreur serveur
+
+components:
+  securitySchemes:
+    acess_Token:
+      type: apiKey
+      in: header
+      name: idSession
+    basicAuth:
+      type: http
+      scheme: basic
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+            username: test
+            password: test
