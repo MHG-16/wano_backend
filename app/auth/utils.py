@@ -11,8 +11,7 @@ def verify_email_and_password(email: str, password: str):
     if login == -1:
         return jsonify({"error": True, "message": "Unkown email"}), 400
     if login == 1:
-        res = update_token_by_email(email)
-        if res:
+        if res := update_token_by_email(email):
             return (
                 jsonify(
                     {

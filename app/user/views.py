@@ -22,5 +22,4 @@ def create_user():
             ),
             409,
         )
-    response = insert(data_user)
-    return response
+    return insert(data_user)
