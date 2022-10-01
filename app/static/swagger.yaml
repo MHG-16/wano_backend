@@ -15,6 +15,8 @@ tags:
   <br/> il génére un access token  pour accéder les autres services web de plateforme</p>"
 - name: User
   description: liste des web services d'user
+- name : "products"
+  description: liste des web services de products
 paths:
   "/login?":
     post:
@@ -47,6 +49,50 @@ paths:
       responses:
         '200':
           description: Deconnected
+  "/product/insert":
+    post:
+      tags:
+      - products
+      summary: insert un nouveau product
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id_user
+                  - name
+                  - price
+                  - date_of_publish
+                properties:
+                  id_user:
+                    type: integer
+                  name:
+                    type: string
+                  price:
+                    type: number
+                  date_of_publish:
+                    type: string
+                  description:
+                    type: string
+                  nb_images:
+                    type: integer
+              example:
+                id_user: 123
+                name: test
+                price: 123
+                date_of_publish: "2022-10-01 21:11:45"
+                description: "test description"
+                nb_images: 0
+      parameters: []
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: user not found
+        '406':
+          description: save error
   "/user/create":
     post:
       tags:
