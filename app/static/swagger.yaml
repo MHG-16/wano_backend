@@ -64,7 +64,6 @@ paths:
                   - id_user
                   - name
                   - price
-                  - date_of_publish
                 properties:
                   id_user:
                     type: integer
@@ -76,15 +75,16 @@ paths:
                     type: string
                   description:
                     type: string
-                  nb_images:
-                    type: integer
+                  url_images:
+                    type: array
+                    items:
+                      type: string
               example:
                 id_user: 123
                 name: test
                 price: 123
-                date_of_publish: "2022-10-01 21:11:45"
                 description: "test description"
-                nb_images: 0
+                url_images: ["img-1"]
       parameters: []
       responses:
         '200':
@@ -93,6 +93,33 @@ paths:
           description: user not found
         '406':
           description: save error
+  "/product/list":
+    get:
+      tags:
+      - products
+      summary: "get all products"
+      parameters: []
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id_product:
+                      type: string
+                    id_user:
+                      type: string
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    description:
+                      type: string
+
   "/user/create":
     post:
       tags:
@@ -115,12 +142,16 @@ paths:
                 properties:
                   first_name:
                     type: "string"
+                    example: "Foobar"
                   last_name:
                     type: "string"
+                    example: "Foobar"
                   email:
                     type: "string"
+                    example: "Foobar@gmail.com"
                   password:
                     type: "string"
+                    example: "test"
                   tel:
                     type: "string"
                   user_status:
@@ -129,6 +160,7 @@ paths:
                     default: 1
                   date_of_birth:
                     type: "string"
+                    example: "2000-01-06"
                   genre:
                     type: "string"
                     example: "m"

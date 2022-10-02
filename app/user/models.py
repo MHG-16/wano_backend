@@ -2,7 +2,7 @@
 # pylint: disable=R0903
 from dataclasses import dataclass
 from sqlalchemy import Column, Integer, String, Date, Boolean
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 from ..utils.database import Base, SESSION
 
@@ -49,12 +49,8 @@ class Users(Base):
 class UsersSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Users
+        include_relationships = True
         load_instance = True
-
-    id_user = auto_field()
-    last_name = auto_field()
-    first_name = auto_field()
-    email = auto_field()
 
 
 @dataclass

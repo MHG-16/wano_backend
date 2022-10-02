@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from flask import Flask, jsonify, g
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
@@ -44,6 +46,18 @@ app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
 
 
 # end swagger specific #
+
+# start logger specific #
+LOGNAME = "wanolog.txt"
+logging.basicConfig(
+    filename=LOGNAME,
+    filemode="a",
+    format="%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    level=logging.DEBUG,
+)
+logging.info("wano log started")
+logger = logging.getLogger("MHG Dev")
 
 
 @app.after_request

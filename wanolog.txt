@@ -1,0 +1,235 @@
+2022-10-02 18:49:58,584 root INFO wano log started
+2022-10-02 18:50:30,136 root INFO wano log started
+2022-10-02 18:50:48,171 root INFO wano log started
+2022-10-02 18:51:15,22 root INFO wano log started
+2022-10-02 18:51:18,22 root INFO wano log started
+2022-10-02 18:51:18,34 werkzeug INFO  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-10-02 18:54:55,159 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:54:55] "GET /swagger/ HTTP/1.1" 200 -
+2022-10-02 18:54:55,265 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:54:55] "GET /swagger/swagger-ui.css HTTP/1.1" 200 -
+2022-10-02 18:54:55,268 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:54:55] "GET /swagger/index.css HTTP/1.1" 200 -
+2022-10-02 18:54:55,275 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:54:55] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2022-10-02 18:54:55,280 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:54:55] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2022-10-02 18:54:55,456 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:54:55] "GET /static/swagger.yaml HTTP/1.1" 200 -
+2022-10-02 18:55:04,599 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:55:04] "POST /user/create HTTP/1.1" 200 -
+2022-10-02 18:55:39,644 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:55:39] "[31m[1mPOST /product/insert HTTP/1.1[0m" 406 -
+2022-10-02 18:55:41,909 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:55:41] "[31m[1mPOST /product/insert HTTP/1.1[0m" 406 -
+2022-10-02 18:56:39,616 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:56:39] "[31m[1mPOST /product/insert HTTP/1.1[0m" 406 -
+2022-10-02 18:56:48,79 root INFO wano log started
+2022-10-02 18:56:48,93 werkzeug INFO  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-10-02 18:56:50,727 app.run ERROR Exception on /product/insert [POST]
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 555, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data too long for column 'date_of_publish' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 276, in execute
+    result = self._cnx.cmd_query(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 563, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1406 (22001): Data too long for column 'date_of_publish' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/mhg-16/Bureau/wano_backend/app/products/views.py", line 17, in create_product
+    return insert(data_prod)
+  File "/home/mhg-16/Bureau/wano_backend/app/products/utils.py", line 12, in insert
+    add_product(data)
+  File "/home/mhg-16/Bureau/wano_backend/app/products/utils.py", line 37, in add_product
+    SESSION.commit()
+  File "<string>", line 2, in commit
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1451, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 829, in commit
+    self._prepare_impl()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 808, in _prepare_impl
+    self.session.flush()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 3383, in flush
+    self._flush(objects)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 3522, in _flush
+    with util.safe_reraise():
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 3483, in _flush
+    flush_context.execute()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1238, in _emit_insert_statements
+    result = connection._execute_20(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 276, in execute
+    result = self._cnx.cmd_query(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 563, in cmd_query
+    raise get_mysql_exception(
+sqlalchemy.exc.DataError: (mysql.connector.errors.DataError) 1406 (22001): Data too long for column 'date_of_publish' at row 1
+[SQL: INSERT INTO products (id_user, name, price, date_of_publish, description) VALUES (%(id_user)s, %(name)s, %(price)s, %(date_of_publish)s, %(description)s)]
+[parameters: {'id_user': 1, 'name': 'test1', 'price': 123, 'date_of_publish': datetime.datetime(2022, 10, 2, 16, 56, 50, 725076), 'description': 'test description'}]
+(Background on this error at: https://sqlalche.me/e/14/9h9h)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1695, in make_response
+    raise TypeError(
+TypeError: The view function for 'Products API.create_product' did not return a valid response. The function either returned None or ended without a return statement.
+2022-10-02 18:56:50,733 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:56:50] "[35m[1mPOST /product/insert HTTP/1.1[0m" 500 -
+2022-10-02 18:56:50,741 werkzeug ERROR Error on request:
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 555, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data too long for column 'date_of_publish' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 276, in execute
+    result = self._cnx.cmd_query(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 563, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1406 (22001): Data too long for column 'date_of_publish' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/mhg-16/Bureau/wano_backend/app/products/views.py", line 17, in create_product
+    return insert(data_prod)
+  File "/home/mhg-16/Bureau/wano_backend/app/products/utils.py", line 12, in insert
+    add_product(data)
+  File "/home/mhg-16/Bureau/wano_backend/app/products/utils.py", line 37, in add_product
+    SESSION.commit()
+  File "<string>", line 2, in commit
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 1451, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 829, in commit
+    self._prepare_impl()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 808, in _prepare_impl
+    self.session.flush()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 3383, in flush
+    self._flush(objects)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 3522, in _flush
+    with util.safe_reraise():
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 3483, in _flush
+    flush_context.execute()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1238, in _emit_insert_statements
+    result = connection._execute_20(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 276, in execute
+    result = self._cnx.cmd_query(
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 563, in cmd_query
+    raise get_mysql_exception(
+sqlalchemy.exc.DataError: (mysql.connector.errors.DataError) 1406 (22001): Data too long for column 'date_of_publish' at row 1
+[SQL: INSERT INTO products (id_user, name, price, date_of_publish, description) VALUES (%(id_user)s, %(name)s, %(price)s, %(date_of_publish)s, %(description)s)]
+[parameters: {'id_user': 1, 'name': 'test1', 'price': 123, 'date_of_publish': datetime.datetime(2022, 10, 2, 16, 56, 50, 725076), 'description': 'test description'}]
+(Background on this error at: https://sqlalche.me/e/14/9h9h)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1695, in make_response
+    raise TypeError(
+TypeError: The view function for 'Products API.create_product' did not return a valid response. The function either returned None or ended without a return statement.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 2076, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1434, in handle_exception
+    return self.finalize_request(server_error, from_error_handler=True)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1539, in finalize_request
+    response = self.make_response(rv)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1695, in make_response
+    raise TypeError(
+TypeError: The view function for 'Products API.create_product' did not return a valid response. The function either returned None or ended without a return statement.
+2022-10-02 18:59:27,121 root INFO wano log started
+2022-10-02 18:59:39,894 root INFO wano log started
+2022-10-02 18:59:39,908 werkzeug INFO  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-10-02 18:59:50,363 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 18:59:50] "[31m[1mPOST /product/insert HTTP/1.1[0m" 400 -
+2022-10-02 19:00:06,828 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 19:00:06] "POST /user/create HTTP/1.1" 200 -
+2022-10-02 19:00:10,600 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 19:00:10] "POST /product/insert HTTP/1.1" 200 -
+2022-10-02 19:00:26,273 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 19:00:26] "GET /product/list HTTP/1.1" 200 -

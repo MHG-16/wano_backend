@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 import hashlib
 import bcrypt
 
@@ -13,3 +14,11 @@ def hash_with_bcrypt(var: str) -> str:
 
 def hash_with_md5(var):
     return hashlib.md5(str(var).encode("utf-8")).hexdigest() if var else var
+
+
+def validate_format_date(date: str, format_date: str):
+    try:
+        datetime.strptime(date, format_date)
+    except ValueError as err:
+        raise ValueError(f"{date} is not a valid date") from err
+    return date

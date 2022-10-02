@@ -2,7 +2,7 @@
 # pylint: skip-file
 from flask.cli import FlaskGroup
 from contextlib import suppress
-from app.products.models import Products
+from app.products.models import Images, Products
 
 from app.run import app
 from app.user.models import Users
@@ -11,10 +11,12 @@ from app.utils.database import SESSION, engine
 
 def init_db():
     with suppress(Exception):
-        Users.__table__.drop(engine)
+        Images.__table__.drop(engine)
         Products.__table__.drop(engine)
+        Users.__table__.drop(engine)
     Users.__table__.create(engine)
     Products.__table__.create(engine)
+    Images.__table__.create(engine)
 
 
 cli = FlaskGroup(app)
@@ -27,4 +29,5 @@ def create_db():
 
 
 if __name__ == "__main__":
+    app.config["DEBUG"] = True
     cli()
