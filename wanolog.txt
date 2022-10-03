@@ -233,3 +233,163 @@ TypeError: The view function for 'Products API.create_product' did not return a 
 2022-10-02 19:00:06,828 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 19:00:06] "POST /user/create HTTP/1.1" 200 -
 2022-10-02 19:00:10,600 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 19:00:10] "POST /product/insert HTTP/1.1" 200 -
 2022-10-02 19:00:26,273 werkzeug INFO 127.0.0.1 - - [02/Oct/2022 19:00:26] "GET /product/list HTTP/1.1" 200 -
+2022-10-03 08:43:48,967 root INFO wano log started
+2022-10-03 08:43:48,994 werkzeug INFO  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-10-03 08:43:58,565 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:43:58] "GET /swagger/ HTTP/1.1" 200 -
+2022-10-03 08:43:58,803 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:43:58] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2022-10-03 08:43:58,808 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:43:58] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2022-10-03 08:43:58,813 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:43:58] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2022-10-03 08:43:58,819 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:43:58] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2022-10-03 08:43:59,158 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:43:59] "GET /swagger/favicon-16x16.png HTTP/1.1" 200 -
+2022-10-03 08:43:59,195 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:43:59] "GET /static/swagger.yaml HTTP/1.1" 200 -
+2022-10-03 08:44:08,63 root INFO wano log started
+2022-10-03 08:44:10,556 root INFO wano log started
+2022-10-03 08:44:10,565 werkzeug INFO  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-10-03 08:44:26,428 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:44:26] "POST /user/create HTTP/1.1" 200 -
+2022-10-03 08:47:04,679 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:47:04] "POST /product/insert HTTP/1.1" 200 -
+2022-10-03 08:49:18,905 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:49:18] "POST /product/insert HTTP/1.1" 200 -
+2022-10-03 08:51:14,240 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:51:14] "POST /product/insert HTTP/1.1" 200 -
+2022-10-03 08:53:04,987 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:53:04] "POST /product/insert HTTP/1.1" 200 -
+2022-10-03 08:54:24,694 app.run ERROR Exception on /product/insert [POST]
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 578, in get_json
+    rv = self.json_module.loads(data)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/json/__init__.py", line 181, in loads
+    return _json.loads(s, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 3 column 11 (char 28)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/wrappers.py", line 128, in on_json_loading_failed
+    return super().on_json_loading_failed(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 609, in on_json_loading_failed
+    raise BadRequest(f"Failed to decode JSON object: {e}")
+werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting value: line 3 column 11 (char 28)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/mhg-16/Bureau/wano_backend/app/products/views.py", line 13, in create_product
+    data_prod = request.json
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 540, in json
+    return self.get_json()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 587, in get_json
+    rv = self.on_json_loading_failed(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/wrappers.py", line 133, in on_json_loading_failed
+    raise BadRequest() from e
+werkzeug.exceptions.BadRequest: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1695, in make_response
+    raise TypeError(
+TypeError: The view function for 'Products API.create_product' did not return a valid response. The function either returned None or ended without a return statement.
+2022-10-03 08:54:24,703 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:54:24] "[35m[1mPOST /product/insert HTTP/1.1[0m" 500 -
+2022-10-03 08:54:24,724 werkzeug ERROR Error on request:
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 578, in get_json
+    rv = self.json_module.loads(data)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/json/__init__.py", line 181, in loads
+    return _json.loads(s, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 3 column 11 (char 28)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/wrappers.py", line 128, in on_json_loading_failed
+    return super().on_json_loading_failed(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 609, in on_json_loading_failed
+    raise BadRequest(f"Failed to decode JSON object: {e}")
+werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting value: line 3 column 11 (char 28)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/mhg-16/Bureau/wano_backend/app/products/views.py", line 13, in create_product
+    data_prod = request.json
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 540, in json
+    return self.get_json()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 587, in get_json
+    rv = self.on_json_loading_failed(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/wrappers.py", line 133, in on_json_loading_failed
+    raise BadRequest() from e
+werkzeug.exceptions.BadRequest: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1695, in make_response
+    raise TypeError(
+TypeError: The view function for 'Products API.create_product' did not return a valid response. The function either returned None or ended without a return statement.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 2076, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1434, in handle_exception
+    return self.finalize_request(server_error, from_error_handler=True)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1539, in finalize_request
+    response = self.make_response(rv)
+  File "/home/mhg-16/Bureau/wano_backend/venv/lib/python3.10/site-packages/flask/app.py", line 1695, in make_response
+    raise TypeError(
+TypeError: The view function for 'Products API.create_product' did not return a valid response. The function either returned None or ended without a return statement.
+2022-10-03 08:54:40,316 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 08:54:40] "POST /product/insert HTTP/1.1" 200 -
+2022-10-03 09:03:22,401 root INFO wano log started
+2022-10-03 09:03:22,413 werkzeug INFO  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-10-03 09:03:35,345 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:03:35] "GET /product/list HTTP/1.1" 200 -
+2022-10-03 09:07:15,789 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:15] "GET /swagger/ HTTP/1.1" 200 -
+2022-10-03 09:07:15,899 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:15] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2022-10-03 09:07:15,904 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:15] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2022-10-03 09:07:15,906 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:15] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2022-10-03 09:07:15,908 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:15] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2022-10-03 09:07:16,216 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:16] "GET /static/swagger.yaml HTTP/1.1" 200 -
+2022-10-03 09:07:44,310 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:44] "GET /swagger/ HTTP/1.1" 200 -
+2022-10-03 09:07:44,366 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:44] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2022-10-03 09:07:44,375 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:44] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2022-10-03 09:07:44,381 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:44] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2022-10-03 09:07:44,385 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:44] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2022-10-03 09:07:44,684 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:44] "GET /static/swagger.yaml HTTP/1.1" 200 -
+2022-10-03 09:07:50,91 werkzeug INFO 127.0.0.1 - - [03/Oct/2022 09:07:50] "GET /product/list HTTP/1.1" 200 -

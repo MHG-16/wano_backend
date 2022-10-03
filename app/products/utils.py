@@ -15,7 +15,10 @@ def insert(data: dict):
     except TypeError as err:
         return jsonify({"error": True, "message": str(err)}), 406
     insert_images(data["url_images"])
-    return (jsonify({"error": False, "message": "user is created successfully"}), 200)
+    return (
+        jsonify({"error": False, "message": "product is created successfully"}),
+        200,
+    )
 
 
 def insert_images(url_images: list) -> None:
@@ -38,7 +41,9 @@ def add_product(data: dict):
 
 
 def get_all_products():
-    query = """SELECT products.*, GROUP_CONCAT(images.url_prefix SEPARATOR ',') AS url_images
-    FROM products
-    INNER JOIN images ON images.id_product = products.id_product  GROUP BY id_product """
+    query = """SELECT md5(products.id_product) AS id,name, price, date_of_publish,
+    GROUP_CONCAT(images.url_prefix SEPARATOR ',') AS url_images, CONCAT(users.last_name," " ,users.first_name) AS publish_autor
+    FROM products INNER JOIN users ON products.id_user = users.id_user
+    INNER JOIN images ON images.id_product = products.id_product  GROUP BY products.id_product;
+    """
     return selectquery(query)

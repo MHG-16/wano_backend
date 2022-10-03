@@ -111,13 +111,15 @@ paths:
                   properties:
                     id_product:
                       type: string
-                    id_user:
-                      type: string
                     name:
                       type: string
                     price:
                       type: number
                     description:
+                      type: string
+                    publish_autor:
+                      type: string
+                    url_images:
                       type: string
 
   "/user/create":
