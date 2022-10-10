@@ -20,4 +20,4 @@ def create_product():
 @app.route("/product/list", methods=["GET"])
 def get_list_all_of_products():
     products = get_all_products()
-    return jsonify({"error": False, "message": products}), 200
+    return jsonify({"error": False, "message": {"products": products}}), 200
