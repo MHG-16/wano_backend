@@ -3,19 +3,16 @@ import traceback
 from werkzeug.local import LocalProxy
 from flask import g
 import mysql.connector as mariadb
-
 from sqlalchemy.exc import InterfaceError, OperationalError
 
 
 def get_db():
-    if "db" not in g:
-        try:
-            # pylint: disable=E0237
-            g.db = connexion()
-        except (ConnectionError) as err:
-            raise ConnectionError("Problem connecting to database") from err
-        return g.db
-    return None
+    try:
+        # pylint: disable=E0237
+        g.db = connexion()
+    except (ConnectionError) as err:
+        raise ConnectionError("Problem connecting to database") from err
+    return g.db
 
 
 def connexion():
@@ -52,7 +49,7 @@ def lastrowcolumnvalue(column_name: str, table_name: str) -> str:
 
 def get_real_id(column_name: str, table_name: str, id_crypted: str) -> str:
     query = f"""SELECT {column_name}  FROM {table_name}
-            where md5(column_name) = {id_crypted}"""
+            where md5({column_name}) = '{id_crypted}'"""
     return selectqueryfetchone(query)
 
 

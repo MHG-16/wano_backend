@@ -10,15 +10,15 @@ from .models import Images, Products
 def insert(data: dict):
     try:
         add_product(data)
+        insert_images(data["url_images"])
+        return (
+            jsonify({"error": False, "message": "product is created successfully"}),
+            200,
+        )
     except IntegrityError:
         return jsonify({"error": True, "message": "user not found"}), 400
     except TypeError as err:
         return jsonify({"error": True, "message": str(err)}), 406
-    insert_images(data["url_images"])
-    return (
-        jsonify({"error": False, "message": "product is created successfully"}),
-        200,
-    )
 
 
 def insert_images(url_images: list) -> None:

@@ -17,6 +17,8 @@ tags:
   description: liste des web services d'user
 - name : "products"
   description: liste des web services de products
+- name : "Ligne de commande"
+  description: liste des web services de ligne de commande en enregistrement sous forme une facture
 paths:
   "/login?":
     post:
@@ -121,6 +123,114 @@ paths:
                       type: string
                     url_images:
                       type: string
+  "/command/insert":
+    post:
+      tags:
+      - "Ligne de commande"
+      summary: Insert a new command from a client request
+      parameters: []
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: success
+        '505':
+          description: 'error server response'
+        '400':
+          description: error saving command
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - facture
+                - products
+              properties:
+                facture:
+                  type: object
+                  properties:
+                    id_verkaufer:
+                      type: integer
+                    id_kunde:
+                      type: integer
+                products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      quantity:
+                        type: integer
+                      id_product:
+                        type: integer
+  "/command/get_by_id/{id_facture}?":
+    get:
+      tags:
+      - Ligne de commande
+      summary: get a facture by a given id
+      parameters:
+      - name: id_facture
+        in: path
+        required: true
+        type: integer
+        schema: {}
+      consume:
+      - application/json
+      description: return a single facture
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: True
+                  message:
+                    type: object
+                    properties:
+                      client:
+                        type: string
+                        example: "test name"
+                      date_facture:
+                        type: string
+                        example: "2022-10-12"
+                      id_kunde:
+                        type: number
+                      id_verkaufer:
+                        type: number
+                      name:
+                        type: string
+                        example: "name of the product"
+                      price_item:
+                        type: number
+                      quantity:
+                        type: number
+                      seller:
+                        type: string
+                        example: "full name of the seller"
+
+
+        '204':
+          description: Aucun facture trouvé
+        '400':
+          description: Échoué. Demande mal comprise
+        '404':
+          description: demande introuvable
+        '500':
+          description: Veuillez contacter les supports en ajoutant en piece jointe les parameters
 
   "/user/create":
     post:

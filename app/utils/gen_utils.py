@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 import hashlib
+from uuid import uuid4
 import bcrypt
 
 
@@ -22,3 +23,7 @@ def validate_format_date(date: str, format_date: str):
     except ValueError as err:
         raise ValueError(f"{date} is not a valid date") from err
     return date
+
+
+def get_unique_id() -> str:
+    return uuid4().hex

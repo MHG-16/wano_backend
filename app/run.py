@@ -8,6 +8,7 @@ from flask_marshmallow import Marshmallow
 
 from app.auth.views import app as auth_app
 from app.user.views import app as user_app
+from app.commannd.views import app as commannd_app
 from app.products.views import app as products_app
 from .utils.database import SESSION, engine
 
@@ -19,6 +20,7 @@ ma = Marshmallow(app)
 app.register_blueprint(auth_app)
 app.register_blueprint(user_app, url_prefix="/user")
 app.register_blueprint(products_app)
+app.register_blueprint(commannd_app)
 
 
 # Handling error
