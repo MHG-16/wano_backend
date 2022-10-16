@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from flask import Flask, jsonify, g
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
@@ -6,6 +8,8 @@ from flask_marshmallow import Marshmallow
 
 from app.auth.views import app as auth_app
 from app.user.views import app as user_app
+from app.commannd.views import app as commannd_app
+from app.products.views import app as products_app
 from .utils.database import SESSION, engine
 
 
@@ -15,6 +19,8 @@ ma = Marshmallow(app)
 
 app.register_blueprint(auth_app)
 app.register_blueprint(user_app, url_prefix="/user")
+app.register_blueprint(products_app)
+app.register_blueprint(commannd_app)
 
 
 # Handling error
@@ -42,6 +48,18 @@ app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
 
 
 # end swagger specific #
+
+# start logger specific #
+LOGNAME = "wanolog.txt"
+logging.basicConfig(
+    filename=LOGNAME,
+    filemode="a",
+    format="%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    level=logging.DEBUG,
+)
+logging.info("wano log started")
+logger = logging.getLogger("MHG Dev")
 
 
 @app.after_request
