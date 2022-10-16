@@ -12,20 +12,13 @@ class Facture(Base):
 
     id_facture = Column(Integer, primary_key=True)
     date_facture = Column(String(10), default=datetime.now().strftime("%Y-%m-%d"))
-    id_verkaufer = Column(Integer, ForeignKey("users.id_user"))
-    verkaufer = relationship(
-        "Users", primaryjoin="Users.id_user == Facture.id_verkaufer"
-    )
     id_kunde = Column(Integer, ForeignKey("users.id_user"))
     kunde = relationship("Users", primaryjoin="Users.id_user == Facture.id_kunde")
 
-    def __init__(
-        self, id_facture=None, date_facture=None, id_verkaufer=None, id_kunde=None
-    ):
+    def __init__(self, id_facture=None, date_facture=None, id_kunde=None):
         self.id_facture = id_facture
         self.date_facture = date_facture
         self.id_kunde = id_kunde
-        self.id_verkaufer = id_verkaufer
 
     def get_by_id_verkaufer(self):
         pass

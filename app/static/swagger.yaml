@@ -51,6 +51,23 @@ paths:
       responses:
         '200':
           description: Deconnected
+  "/product/get_by_id/{id_product}?":
+    get:
+      tags:
+      - products
+      summary: get a product by a given id
+      parameters:
+      - name: id_product
+        in: path
+        required: true
+        type: integer
+        schema: {}
+      consume:
+      - application/json
+      description: return a single product
+      responses:
+        '200':
+          description: ok
   "/product/insert":
     post:
       tags:
@@ -160,8 +177,6 @@ paths:
                 facture:
                   type: object
                   properties:
-                    id_verkaufer:
-                      type: integer
                     id_kunde:
                       type: integer
                 products:
@@ -208,8 +223,6 @@ paths:
                         type: string
                         example: "2022-10-12"
                       id_kunde:
-                        type: number
-                      id_verkaufer:
                         type: number
                       name:
                         type: string

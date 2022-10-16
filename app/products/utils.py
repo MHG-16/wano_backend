@@ -47,3 +47,12 @@ def get_all_products():
     INNER JOIN images ON images.id_product = products.id_product  GROUP BY products.id_product;
     """
     return selectquery(query)
+
+
+def get_product(product_id):
+    query = f"""SELECT md5(products.id_product) AS id,name, price, date_of_publish,
+    GROUP_CONCAT(images.url_prefix SEPARATOR ',') AS url_images, CONCAT(users.last_name," " ,users.first_name) AS publish_autor
+    FROM products INNER JOIN users ON products.id_user = users.id_user
+    INNER JOIN images ON images.id_product = products.id_product where md5(products.id_product)= '{product_id}' GROUP BY products.id_product;
+    """
+    return selectquery(query)

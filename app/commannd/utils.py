@@ -62,16 +62,14 @@ def getRealIdEchennce(id_en_md5: str) -> int:
 
 
 def get_by_id(id_en_md5):
-    query = f"""SELECT factures.date_facture, factures.id_kunde, factures.id_verkaufer,
+    query = f"""SELECT factures.date_facture, factures.id_kunde,
     quantity, products.price as price_item, products.name   from ligneDeCommand
     INNER JOIN products ON products.id_product = ligneDeCommand.id_product
     INNER JOIN factures ON factures.id_facture = ligneDeCommand.id_facture
     where factures.id_facture = {id_en_md5}
     """
     row = selectquery(query)[0]
-
     row["client"] = get_full_name(row["id_kunde"])
-    row["seller"] = get_full_name(row["id_verkaufer"])
     return row
 
 
