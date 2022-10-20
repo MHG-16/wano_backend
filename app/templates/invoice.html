@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+</head>
+<body>
+    <h1>Invoice</h1>
+    <main>
+        <div class="invoiceHeader">
+            <div class="LeftPartie">
+                <h3>
+                    Bill to : {{client_name}}
+                </h3>
+            </div>
+            <div class="RightPartie">
+                <h3>Invoice date : {{date_facture}}</h3>
+            </div>
+        </div>
+        <div class="invoiceContent">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Qty</th>
+                        <th>name</th>
+                        <th>unit price</th>
+                        <th>amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>
+                            {{item['quantity']}}
+                        </td>
+                        <td>
+                            {{item['product_name']}}
+                        </td>
+                        <td>
+                            {{item['price']}}
+                        </td>
+                        <td>
+                            {{item['price'] * item['quantity']}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total :</th>
+                        <td>{{total}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
