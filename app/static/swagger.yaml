@@ -68,6 +68,23 @@ paths:
       responses:
         '200':
           description: ok
+  "/product/get_pdf/{id_product}?":
+    get:
+      tags:
+      - products
+      summary: return a facture in pdf format
+      parameters:
+      - name: id_product
+        in: path
+        required: true
+        type: integer
+        schema: {}
+      consume:
+      - application/json
+      description: return a facture with pdf format
+      responses:
+        '200':
+          description: ok
   "/product/insert":
     post:
       tags:
@@ -222,20 +239,19 @@ paths:
                       date_facture:
                         type: string
                         example: "2022-10-12"
-                      id_kunde:
+                      id_client:
                         type: number
-                      name:
-                        type: string
-                        example: "name of the product"
-                      price_item:
-                        type: number
-                      quantity:
-                        type: number
-                      seller:
-                        type: string
-                        example: "full name of the seller"
-
-
+                      products:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            product_name:
+                              type: string
+                            quantity:
+                              type: number
+                            vendor_name:
+                              type: string
         '204':
           description: Aucun facture trouvé
         '400':
@@ -244,7 +260,20 @@ paths:
           description: demande introuvable
         '500':
           description: Veuillez contacter les supports en ajoutant en piece jointe les parameters
-
+  "/command/list/{id_client}?":
+    get:
+      tags:
+      - Ligne de commande
+      summary: get a list of facture by id client
+      parameters:
+      - name: id_client
+        in: path
+        required: true
+        type: integer
+        schema: {}
+      responses:
+        '200':
+          description: OK
   "/user/create":
     post:
       tags:

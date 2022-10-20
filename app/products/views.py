@@ -2,6 +2,8 @@
 from flask import request, jsonify
 from flask import Blueprint
 
+from app.commannd.utils import get_facture_pdf
+
 from .utils import get_all_products, get_product, insert
 
 app = Blueprint("Products API", __name__)
@@ -27,3 +29,12 @@ def get_list_all_of_products():
 def get_product_by_id(product_id: str) -> dict:
     product = get_product(product_id)
     return jsonify({"error": False, "message": product}), 200
+
+
+@app.route("/product/get_pdf/<id_product>")
+def get_facture_in_pdf(id_product: str):
+    try:
+        get_facture_pdf(id_product)
+        return jsonify({"error": False, "message": "ok"})
+    except Exception as err:
+        return jsonify({"error": True, "message": err})

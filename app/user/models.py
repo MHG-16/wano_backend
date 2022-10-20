@@ -55,9 +55,8 @@ class UserActions:
         return Users.dump(data)
 
     def update_password(self):
-        result = (
+        return (
             SESSION.query(Users)
             .filter(Users.email.like(self.adresse_email))
             .update({"password": self.password})
         )
-        return result

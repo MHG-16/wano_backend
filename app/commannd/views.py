@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, jsonify
 
-from .utils import insert, getRealIdEchennce, get_by_id
+from .utils import (
+    get_all_data_factures,
+    get_list_factures_by_id_client,
+    insert,
+    getRealIdEchennce,
+)
 
 app = Blueprint("Command Mangement API", __name__)
 
@@ -10,7 +15,6 @@ app = Blueprint("Command Mangement API", __name__)
 def insertproduct():
     try:
         data = request.get_json()
-        print(data)
     except TypeError:
         return jsonify({"error": True, "message": "Invalid parameters"}), 505
     return insert(data)
@@ -29,5 +33,21 @@ def get_facture_by_id(id_facture):
             ),
             406,
         )
-    facture = get_by_id(id_facture)
+    facture = get_all_data_factures(id_facture)
     return jsonify({"error": False, "message": facture}), 200
+
+
+@app.route("/command/list/<id_client>", methods=["GET"])
+def get_list_all_of_factures_of_Client(id_client):
+    if id_client is None:
+        return (
+            jsonify(
+                {
+                    "error": True,
+                    "message": "Aucun facture not found in database with this id",
+                }
+            ),
+            406,
+        )
+    factures = get_list_factures_by_id_client(id_client)
+    return jsonify({"error": True, "message": factures}), 200
