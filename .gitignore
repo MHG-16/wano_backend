@@ -9,3 +9,4 @@ env*
 .env
 
 wanolog.txt
+facture*.pdf

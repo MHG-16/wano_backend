@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy.exc import IntegrityError
 from flask import jsonify, render_template, send_file
-from weasyprint import HTML
+from pdfkit import from_string
 
 from ..utils.db_utils import (
     lastrowcolumnvalue,
@@ -115,5 +115,5 @@ def get_facture_pdf(id_en_md5: str):
         client_name=facture_data["client"],
         items=facture_data["products"],
     )
-    HTML(string=rendred).write_pdf("facture.pdf")
+    from_string(rendred, "facture.pdf")
     return send_file("facture.pdf")
