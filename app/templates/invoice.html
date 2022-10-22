@@ -1,26 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
+    <style>
+        @import url("http://fonts.cdnfonts.com/css/prompt");
+
+        html {
+            background-color: aliceblue;
+            font-family: "prompt", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1D2023;
+            padding: 0.1rem 0;
+        }
+
+        header .title {
+            -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 15% 100%);
+            clip-path: polygon(0 0, 100% 0%, 100% 100%, 15% 100%);
+            background-color: #1463F3;
+            color: whitesmoke;
+            text-align: right;
+            margin-right: 5%;
+            padding: 1% 5%;
+            margin-left: 75%;
+            width: -webkit-min-content;
+            width: -moz-min-content;
+            width: min-content;
+        }
+
+        main {
+            margin-top: 1rem;
+        }
+
+        main .invoiceHeader {
+            background-color: #84AAFC;
+            -webkit-clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
+            width: 50%;
+            padding: 1rem 0.5rem;
+            color: whitesmoke;
+        }
+
+        .invoiceContent {
+            display: grid;
+            place-items: center;
+            margin-top: 1rem;
+            width: 90%;
+            margin-left: 5%;
+        }
+        .invoiceContent table {
+            width: 100%;
+        }
+        .invoiceContent table thead {
+            background-color: #1D2023;
+            color: whitesmoke;
+            border-collapse: collapse;
+            font-weight: bold;
+            font-size: larger;
+            text-transform: capitalize;
+        }
+
+        .invoiceContent table thead tr th {
+            padding: 1rem 1rem;
+        }
+
+        .invoiceContent table tbody tr {
+            background-color: #1463F3;
+        }
+
+        .invoiceContent table tbody tr td {
+            color: whitesmoke;
+            padding: 1rem 0.5rem;
+            text-align: center;
+        }
+
+        .invoiceContent table tbody tr:nth-child(2n) {
+            background-color: #84AAFC;
+        }
+
+        .invoiceContent table tfoot tr {
+            background-color: #1D2023;
+            color: aliceblue;
+        }
+
+        .invoiceContent table tfoot tr th,
+        .invoiceContent table tfoot tr td {
+            padding: 1rem 0rem;
+            text-align: center;
+        }
+
+        hr {
+            color: #84AAFC;
+            height: 5px;
+            background-color: #84AAFC;
+        }
+
+        footer {
+            display: grid;
+            grid-template-columns: 49% 49%;
+            gap: 2%;
+        }
+
+        footer .containerRight {
+            position: fixed;
+            bottom: 5%;
+            right: 5%;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        footer .containerRight div {
+            margin-bottom: 2rem;
+        }
+        footer .containerRight div hr {
+            height: 1px;
+            color: #1D2023;
+            background-color: #1D2023;
+            margin-top: 2rem;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Invoice</h1>
+    <header>
+        <h1 class="title">Invoice</h1>
+    </header>
     <main>
         <div class="invoiceHeader">
-            <div class="LeftPartie">
-                <h3>
-                    Bill to : {{client_name}}
-                </h3>
-            </div>
-            <div class="RightPartie">
-                <h3>Invoice date : {{date_facture}}</h3>
-            </div>
+            <h3>
+                Bill to : {{client_name}}
+            </h3>
+            <h3>Invoice date : {{date_facture}}</h3>
         </div>
         <div class="invoiceContent">
-            <table>
+            <table cellspacing="0">
                 <thead>
                     <tr>
                         <th>Qty</th>
@@ -49,12 +169,35 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Total :</th>
-                        <td>{{total}}</td>
+                        <th colspan="2">Total :</th>
+                        <td colspan="2">{{total}}</td>
                     </tr>
                 </tfoot>
             </table>
         </div>
     </main>
+    <hr />
+    <footer>
+        <div class="containerLeft">
+            <div class="payement">
+                <h3>Payement info:</h3>
+                <h4>Type: Cash/manuel</h4>
+                <h4>Detail:</h4>
+            </div>
+            <div class="Terms">
+                <h3>Termes and conditions</h3>
+                <h4>Payement immediately before or during the delivary of your command </h4>
+            </div>
+        </div>
+        <div class="containerRight">
+            <div>
+                Read in  . . / . . / . . . .
+            </div>
+            <div>
+                Signature
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
