@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 from flask import request, jsonify
 from flask import Blueprint
 
@@ -33,8 +34,6 @@ def get_product_by_id(product_id: str) -> dict:
 
 @app.route("/product/get_pdf/<id_product>")
 def get_facture_in_pdf(id_product: str):
-    try:
-        get_facture_pdf(id_product)
-        return jsonify({"error": False, "message": "ok"})
-    except Exception as err:
-        return jsonify({"error": True, "message": err})
+    pdf = get_facture_pdf(id_product)
+    os.remove("facture.pdf")
+    return pdf

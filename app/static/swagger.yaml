@@ -84,7 +84,14 @@ paths:
       description: return a facture with pdf format
       responses:
         '200':
-          description: ok
+          description: get a pdf file
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: server error
   "/product/insert":
     post:
       tags:

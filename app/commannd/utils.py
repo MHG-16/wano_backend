@@ -116,4 +116,4 @@ def get_facture_pdf(id_en_md5: str):
         items=facture_data["products"],
     )
     from_string(rendred, "facture.pdf")
-    return send_file("facture.pdf")
+    return send_file("../facture.pdf", as_attachment=True)
